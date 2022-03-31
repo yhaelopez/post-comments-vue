@@ -6,27 +6,25 @@
 
         <title>Laravel</title>
 
+        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
-        <!-- Styles -->
-
-        <script defer src="{{ asset('js/app.js') }}"></script>
-
-        <style>
-            body {
-                font-family: 'Nunito', sans-serif;
-            }
-        </style>
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body class="antialiased">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-10 col-sm-8">
-                    <div id="app"></div>
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+
+                        <div id="app">
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
+         <script src="{{ asset('/js/app.js') }}"></script>
     </body>
 </html>
