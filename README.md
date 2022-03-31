@@ -1,9 +1,9 @@
-Copy .env.example to .env
-Configure any empty database in .env
-Clone the project
-Run composer install
-Run php artisan key:generate
-Run php artisan migrate:fresh
-Run php artisan test --filter CommentTest
-Run php artisan ser
-Open browser in http://localhost:8000
+Configure any empty database in .env<br>
+Copy .env.example to .env<br>
+Clone the project<br>
+Run composer install<br>
+Run php artisan key:generate<br>
+Run php artisan migrate:fresh<br>
+Run php artisan test --filter CommentTest<br>
+Run php artisan ser<br>
+Open browser in http://localhost:8000<br>
