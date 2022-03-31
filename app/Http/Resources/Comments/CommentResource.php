@@ -16,17 +16,15 @@ class CommentResource extends JsonResource
     {
         return [
             'type' => 'comment',
-            'id' => $this->id,
             'attributes' => [
+                'id' => $this->id,
                 'post_id' => $this->post_id,
                 'parent_id' => $this->parent_id,
                 'level' => $this->level,
                 'username' => $this->username,
                 'content' => $this->content,
+                'replies' => CommentCollection::make($this->replies),
             ],
-            'links' => [
-                // 'self' => route('api.v1.comments.show', $this)
-            ]
         ];
     }
 }

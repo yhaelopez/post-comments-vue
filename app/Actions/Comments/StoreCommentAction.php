@@ -3,7 +3,6 @@
 namespace App\Actions\Comments;
 
 use App\Models\Comment;
-use Illuminate\Support\Facades\DB;
 
 class StoreCommentAction
 {

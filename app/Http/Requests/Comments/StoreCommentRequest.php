@@ -26,7 +26,7 @@ class StoreCommentRequest extends FormRequest
         return [
             'post_id' => ['required', 'numeric'],
             'parent_id' => ['sometimes', 'numeric'],
-            'level' => ['required', 'numeric'],
+            'level' => ['sometimes', 'numeric'],
             'username' => ['required', 'string'],
             'content' => ['required', 'string'],
         ];

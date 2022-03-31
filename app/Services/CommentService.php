@@ -20,7 +20,7 @@ class CommentService
     public function getComments() : Collection
     {
         try {
-            $comments = Comment::with('replies.replies')->whereLevel(0)->get();
+            $comments = Comment::with('replies.replies')->whereLevel(0)->orderByDesc('id')->get();
             return $comments;
         } catch (\Throwable $th) {
             throw $th;
@@ -31,9 +31,23 @@ class CommentService
     {
         try {
             DB::beginTransaction();
-            $comment = $this->storeCommentAction->execute($data);
+
+            if(array_key_exists('parent_id', $data)) {
+                $parentComment = Comment::find($data['parent_id']);
+                $level = $parentComment->level + 1;
+                if($level < 3) {
+                    $data += ['level' => $level];
+                } else {
+                    $data['parent_id'] = $parentComment->parent_id;
+                    $data += ['level' => 2];
+                }
+            } else {
+                $data += ['level' => 0];
+            }
+
+            $newComment = $this->storeCommentAction->execute($data);
             DB::commit();
-            return $comment;
+            return $newComment;
         } catch (\Throwable $th) {
             DB::rollback();
             throw $th;

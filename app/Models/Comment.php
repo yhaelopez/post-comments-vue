@@ -12,6 +12,7 @@ class Comment extends Model
 
     protected $fillable = [
         'post_id',
+        'parent_id',
         'level',
         'username',
         'content',
@@ -25,7 +26,7 @@ class Comment extends Model
 
     public function replies() : HasMany
     {
-        return $this->hasMany(Comment::class, 'parent_id');
+        return $this->hasMany(Comment::class, 'parent_id')->orderByDesc('id');
     }
 
 }

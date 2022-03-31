@@ -16,9 +16,6 @@ class CommentCollection extends ResourceCollection
     {
         return [
             'data' => CommentResource::collection($this->collection),
-            'links' => [
-                'self' => route('api.v1.comments.index')
-            ],
             'meta' => [
                 'comments_count' => $this->collection->count()
             ]

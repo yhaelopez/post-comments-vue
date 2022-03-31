@@ -30,7 +30,7 @@ class CommentController extends Controller
     public function store(StoreCommentRequest $request)
     {
         try {
-            $data = $request->safe()->only(['post_id', 'parent_id', 'level', 'username', 'content']);
+            $data = $request->safe()->only(['post_id', 'parent_id', 'username', 'content']);
             $comment = $this->service->store($data);
             return CommentResource::make($comment);
         } catch (\Throwable $th) {
