@@ -5692,6 +5692,11 @@ var NewComment = function NewComment(props) {
       parentId = props.parentId,
       setIsOpen = props.setIsOpen;
 
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      error = _useState6[0],
+      setError = _useState6[1];
+
   var handleSubmit = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
       var postId,
@@ -5705,6 +5710,20 @@ var NewComment = function NewComment(props) {
             case 0:
               postId = _args.length > 0 && _args[0] !== undefined ? _args[0] : 1;
               _context.prev = 1;
+
+              if (error) {
+                setError(false);
+              }
+
+              if (!(!username || !content)) {
+                _context.next = 6;
+                break;
+              }
+
+              setError(true);
+              return _context.abrupt("return");
+
+            case 6:
               headers = {
                 Accept: "application/json",
                 "Content-Type": "application/json"
@@ -5719,12 +5738,12 @@ var NewComment = function NewComment(props) {
                 data.parent_id = parentId;
               }
 
-              _context.next = 7;
+              _context.next = 11;
               return axios__WEBPACK_IMPORTED_MODULE_1___default().post("http://localhost:8000/api/v1/comments", data, {
                 headers: headers
               });
 
-            case 7:
+            case 11:
               response = _context.sent;
               console.log(response.data.data);
 
@@ -5733,20 +5752,20 @@ var NewComment = function NewComment(props) {
               }
 
               setLoading(!loading);
-              _context.next = 16;
+              _context.next = 20;
               break;
 
-            case 13:
-              _context.prev = 13;
+            case 17:
+              _context.prev = 17;
               _context.t0 = _context["catch"](1);
               console.log(_context.t0);
 
-            case 16:
+            case 20:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[1, 13]]);
+      }, _callee, null, [[1, 17]]);
     }));
 
     return function handleSubmit() {
@@ -5755,7 +5774,11 @@ var NewComment = function NewComment(props) {
   }();
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+    children: [error && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "alert alert-danger",
+      role: "alert",
+      children: "Both fields must be filled to be able to comment"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
       className: "form-control mb-2 bg-white",
       placeholder: "Username",
       type: "text",

@@ -5,9 +5,17 @@ const NewComment = (props) => {
     const [username, setUsername] = useState("");
     const [content, setContent] = useState("");
     const { setLoading, loading, parentId, setIsOpen } = props;
+    const [error, setError] = useState(false);
 
     const handleSubmit = async (postId = 1) => {
         try {
+            if (error) {
+                setError(false);
+            }
+            if (!username || !content) {
+                setError(true);
+                return;
+            }
             let headers = {
                 Accept: "application/json",
                 "Content-Type": "application/json",
@@ -29,6 +37,7 @@ const NewComment = (props) => {
             if (setIsOpen) {
                 setIsOpen(false);
             }
+
             setLoading(!loading);
         } catch (error) {
             console.log(error);
@@ -37,6 +46,11 @@ const NewComment = (props) => {
 
     return (
         <>
+            {error && (
+                <div className="alert alert-danger" role="alert">
+                    Both fields must be filled to be able to comment
+                </div>
+            )}
             <input
                 className="form-control mb-2 bg-white"
                 placeholder="Username"
